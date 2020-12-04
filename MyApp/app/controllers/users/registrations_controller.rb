@@ -68,7 +68,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # add custom create logic here
     super
     users = User.all
-    puts users.length
     if users.length == 1
       @user.role = "Admin"
       @user.save
