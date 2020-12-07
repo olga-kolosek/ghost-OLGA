@@ -69,7 +69,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     users = User.all
     if users.length == 1
-      @user.role = "Admin"
+      @user.add_role(:admin)
       @user.save
     end
   end
