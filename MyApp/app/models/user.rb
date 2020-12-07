@@ -5,4 +5,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
      	:recoverable, :rememberable, :validatable
+
+  def admin?
+  	has_role?(:admin)
+  end
+
+  def client?
+  	has_role?(:client)
+  end    	
 end
