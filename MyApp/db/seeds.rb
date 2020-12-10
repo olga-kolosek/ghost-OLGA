@@ -7,15 +7,24 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Role.create(name: :admin)
-Role.create(name: :client)
+Role.create(name: :author)
+Role.create(name: :editor)
+
 user1 = User.create(
 					email: 'admin@gmail.com',
 					password: 'password1234',
-					password_confirmation: 'password1234')
+					password_confirmation: 'password1234',
+					role: 'admin')
 user1.add_role(:admin)
 user2 = User.create(
-					email: 'client@gmail.com',
+					email: 'author@gmail.com',
 					password: 'password1234',
-					password_confirmation: 'password1234')
-user2.add_role(:client)
-
+					password_confirmation: 'password1234', 
+					role: 'author')
+user2.add_role(:author)
+user2 = User.create(
+					email: 'editor@gmail.com',
+					password: 'password1234',
+					password_confirmation: 'password1234', 
+					role: 'editor')
+user2.add_role(:editor)
