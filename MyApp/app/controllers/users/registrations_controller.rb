@@ -2,36 +2,25 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_permitted_parameters, only: [:update]
+  before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    super
-  end
 
   # POST /resource
- def create
+  def create
     super
-    users = User.all
-    if users.length == 1
-      @user.add_role(:admin)
-    else
-      @user.add_role(:author)
-    end
+    User.all.length == 1 ? @user.add_role(:admin) : @user.add_role(:author)
     @user.save
   end
 
   # GET /resource/edit
-  def edit
-    super
-  end
 
   # PUT /resource
-  def update
-    super
+  #def update
+  #  super
     #@user.add_role(@user.role)
     #@user.save
-  end
+  #end
 
   # DELETE /resource
   # def destroy
@@ -47,7 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -55,9 +44,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :image, :full_name, :role, :bio])
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
@@ -68,10 +57,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-
- 
-
- 
-
 
 end
