@@ -6,11 +6,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
      	:recoverable, :rememberable, :validatable
 
+  enum role: [:admin, :author, :editor]
+
   def admin?
   	has_role?(:admin)
   end
-
-  def client?
-  	has_role?(:client)
-  end    	
+ 	
 end
