@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+
+  before_action :configure_signup_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -9,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    User.all.length == 1 ? @user.add_role(:admin) : @user.add_role(:author)
+    User.all.length == 1 ? @user.role = :admin : @user.role = :author
     @user.save
   end
 
@@ -21,6 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #@user.add_role(@user.role)
     #@user.save
   #end
+
 
   # DELETE /resource
   # def destroy
@@ -46,6 +48,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :image, :full_name, :role, :bio])
+  end
+
+  def configure_signup_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :image])
   end
 
   # The path used after sign up.
