@@ -24,13 +24,6 @@
         <%= f.text_area :bio, class: "form-control" %>
       </div>
     </div>
-
-    <div class="row">
-      <div class="form-group col-md-4">
-        <%= f.label :image %> <i>(leave blank if you don't want to change it)</i><br />
-        <%= f.text_field :image, class: "form-control" %>
-      </div>
-    </div>
     
     <%if resource.role == 'admin' %>
     <div class="row">
@@ -40,6 +33,21 @@
     </div>
     <% end %>
 
+
+    <%  if resource.image? %>
+        <%= image_tag resource.image_url(:thumb) %>
+    <% else %>
+      <%= link_to image_tag("user.png"), root_path %>
+    <% end %>
+
+    <div class="row">
+      <div class="form-group col-md-4">
+      <p>
+        <%= f.file_field :image %>
+      </p>
+      </div>
+    </div>
+    
     <div class="row">
       <div class="form-group col-md-4">
         <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
