@@ -10,8 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    User.all.length == 1 ? @user.role = :admin : @user.role = :author
-    @user.save
+    @user.set_role
   end
 
   # GET /resource/edit

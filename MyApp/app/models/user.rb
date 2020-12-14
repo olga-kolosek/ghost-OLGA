@@ -15,5 +15,10 @@
   def admin?
     has_role?(:admin)
   end
+
+  def set_role 
+    User.count == 1 ? self.role = :admin : self.role = :author
+    self.save
+  end
   
 end
