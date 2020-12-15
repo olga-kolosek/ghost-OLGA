@@ -20,5 +20,10 @@
     User.count == 1 ? self.role = :admin : self.role = :author
     self.save
   end
-  
+
+  def update_last_seen
+    self.last_seen_at = Time.current
+    self.save
+  end
+    
 end
