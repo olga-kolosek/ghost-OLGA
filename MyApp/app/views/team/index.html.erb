@@ -6,16 +6,24 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Email</th>
+						<th>Name</th>
+						<th>Image</th>
 						<th>Role</th>
+						<th>Last seen</th>
 						<th>Status</th>	
 					</tr>
 				</thead>
 				<tbody>
 					<% @users.each do |user| %>
 						<tr>
-							<td> <%= user.email %> </td>
+							<td> <%= user.full_name %> </td>
+							<%  if user.image? %>
+        						<td><%= image_tag user.image_url(:thumb), :size => "50x50" %></td>
+    						<% else %>
+    						<td></td>
+    						<% end %>
 							<td> <%= user.role %> </td>
+							<td><%= user.last_seen_at %> </td>
 							<td> <%= user_status(user) %> </td>
 						</tr>
 					<% end %>
