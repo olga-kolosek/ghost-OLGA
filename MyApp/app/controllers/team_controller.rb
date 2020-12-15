@@ -6,8 +6,8 @@ class TeamController < ApplicationController
     redirect_to root_path if current_user.role != 'admin'
   end
 
-	def index
-		@users = User.all
-	end
+  def index
+    @users = User.all
+  end
 
 end
