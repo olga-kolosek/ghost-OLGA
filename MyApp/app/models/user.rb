@@ -4,7 +4,7 @@
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-      :recoverable, :rememberable, :validatable
+      :recoverable, :rememberable, :validatable, :invitable, invite_for: 7.days
       
   # attr_accessible :image, :remote_image_url
   mount_uploader :image, ImageUploader    
