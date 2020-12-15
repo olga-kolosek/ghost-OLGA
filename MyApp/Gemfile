@@ -39,6 +39,8 @@ gem 'autoprefixer-rails'
 gem 'pundit'
 gem 'rmagick'
 gem 'carrierwave'
+gem 'devise_invitable', '~> 2.0.0'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -48,6 +50,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'database_cleaner'
   gem 'mini_racer'
+  gem 'letter_opener'
+  gem 'email_spec'
 end
 
 group :development do

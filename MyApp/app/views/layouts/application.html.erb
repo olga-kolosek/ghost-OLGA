@@ -28,6 +28,9 @@
             <% if user_signed_in? %>
                 <div class="Container">
                   <button class="navbar-brand"><%= link_to "Edit profile", edit_user_registration_path %></button>
+                  <% if current_user.role == 'admin' %>
+                    <button class="navbar-brand"><%= link_to "Team", "/team" %></button> 
+                  <% end %>
                   <button class="navbar-brand"><%= link_to "Logout", destroy_user_session_path, method: :delete %></button>
                 </div>
                 <% else %>
