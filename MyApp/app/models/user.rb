@@ -12,7 +12,7 @@
   enum role: [:admin, :author, :editor]
 
   scope :last_seen_scope, -> { where(last_seen_at: 15.minutes.ago..DateTime.now).or(where(:last_seen_at => nil)) }
-  scope :team_scope, -> { where.not(:invitation_sent_at => nil)}
+  scope :invitation_sent, -> { where.not(:invitation_sent_at => nil)}
 
 
   def admin?
