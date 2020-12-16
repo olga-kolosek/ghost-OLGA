@@ -47,7 +47,7 @@ class Users::SessionsController < Devise::SessionsController
   end  
 
   def logged_in
-    @users = User.last_seen_scope
+    @users = User.last_seen
   end
     
 end
