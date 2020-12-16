@@ -10,13 +10,22 @@
   mount_uploader :image, ImageUploader    
 
   enum role: [:admin, :author, :editor]
+  has_many :stories, dependent: :destroy
 
   scope :last_seen, -> { where.not(last_seen_at: 2.minutes.ago..DateTime.now).or(where(:last_seen_at => nil)) }
   scope :invitation_sent, -> { where.not(:invitation_sent_at => nil)}
 
 
   def admin?
-    has_role?(:admin)
+    self.try(:role) == "admin"
+  end
+
+  def author?
+    self.try(:role) == "author"
+  end
+
+  def editor?
+    self.try(:role) == "editor"
   end
 
   def set_role 

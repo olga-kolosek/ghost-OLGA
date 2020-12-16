@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   end
 
   get 'team', action: :index, controller: 'team'
+  resources :tags
+  get 'stories' => 'stories#index'
+
  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

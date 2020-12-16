@@ -1,0 +1,31 @@
+<div class="col-md-8 col-md-offset-2">
+  <h2> Stories </h2>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Author</th>
+            <th>Edited</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @stories.each do |story| %>
+            <tr>
+              <td> <%= story.title %> </td>
+              <td> <%= story.content %></td>
+              <td> <%= story.user.full_name %></td>
+              <td><%= story.updated_at %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+      <br>
+
+    </div>
+  </div>
+</div>
