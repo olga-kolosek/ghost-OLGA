@@ -2,7 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  before_action :set_last_seen_at, if: proc { current_user && (session[:last_seen_at] == nil || session[:last_seen_at] < 15.minutes.ago) }, only: [:destroy]
+  before_action :set_last_seen_at, if: :logged_in, only: [:destroy]
 
   # GET /resource/sign_in
   # def new
@@ -45,5 +45,9 @@ class Users::SessionsController < Devise::SessionsController
     current_user.update_last_seen
     session[:last_seen_at] = Time.current
   end  
+
+  def logged_in
+    @users = User.last_seen_scope
+  end
     
 end

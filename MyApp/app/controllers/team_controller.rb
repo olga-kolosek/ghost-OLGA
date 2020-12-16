@@ -7,7 +7,7 @@ class TeamController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.team_scope
   end
 
 end
