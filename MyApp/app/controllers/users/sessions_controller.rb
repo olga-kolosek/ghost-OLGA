@@ -2,6 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  before_action :set_last_seen_at, if: :logged_in, only: [:destroy]
 
   # GET /resource/sign_in
   # def new
@@ -36,6 +37,17 @@ class Users::SessionsController < Devise::SessionsController
 
   def destroy
     super
+  end
+
+  private
+  
+  def set_last_seen_at
+    current_user.update_last_seen
+    session[:last_seen_at] = Time.current
+  end  
+
+  def logged_in
+    User.last_seen.include?(current_user) 
   end
     
 end

@@ -11,6 +11,9 @@
 
   enum role: [:admin, :author, :editor]
 
+  scope :last_seen, -> { where.not(last_seen_at: 2.minutes.ago..DateTime.now).or(where(:last_seen_at => nil)) }
+  scope :invitation_sent, -> { where.not(:invitation_sent_at => nil)}
+
 
   def admin?
     has_role?(:admin)
@@ -20,5 +23,10 @@
     User.count == 1 ? self.role = :admin : self.role = :author
     self.save
   end
-  
+
+  def update_last_seen
+    self.last_seen_at = Time.current
+    self.save
+  end
+    
 end
