@@ -1,5 +1,4 @@
 class StoriesController < ApplicationController
-  include Pundit
 
   before_action :authenticate_user!
   before_action :set_story, only: [:show, :edit, :update, :destroy]
@@ -9,13 +8,9 @@ class StoriesController < ApplicationController
     authorize @story
   end
 
+
   def index
-    if current_user.admin? || current_user.editor?
-      @stories = Story.most_recent
-    else
-      @stories = policy_scope(Story.most_recent)
-      @stories = @stories.where(user_id: current_user.id)
-    end
+    @stories = policy_scope(Story.most_recent)
   end
 
   def new
@@ -39,8 +34,8 @@ class StoriesController < ApplicationController
   end
 
   def update
-      @story.update(story_params)
-      redirect_to stories_path
+    @story.update(story_params)
+    redirect_to stories_path
   end
 
   def show

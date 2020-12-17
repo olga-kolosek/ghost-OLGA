@@ -1,4 +1,24 @@
 class StoryPolicy < ApplicationPolicy
+class Scope
+    def initialize(user, scope)
+      @user  = user
+      @scope = scope
+    end
+
+    def resolve
+      if user.admin? || user.editor?
+        scope.all
+      else
+        scope.where(user: user)
+      end
+    end
+
+    private
+
+    attr_reader :user, :scope
+  end
+
+
   def index?
     true
   end
@@ -20,4 +40,7 @@ class StoryPolicy < ApplicationPolicy
     def story
       record
     end
+
 end
+
+
