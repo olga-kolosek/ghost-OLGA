@@ -1,0 +1,45 @@
+<%= flash_messages %>
+<div class="col-md-8 col-md-offset-2">
+  <h2> Stories </h2>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Author</th>
+            <th>Edited</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @stories.each do |story| %>
+          <tr>
+            <td> <%= link_to story.title, story_path(story), style: "color: white;" %> </td>
+            <td> <%= story.content %></td>
+            <td> <%= story.user.full_name %></td>
+            <td><%= story.updated_at %> </td>
+            <td>
+              <button type="button" class="btn btn-light"><%= link_to "Edit", edit_story_path(story) %></button> 
+            </td>
+            <td>
+
+              <%=button_to 'Delete', {:controller => :stories, :action => 'destroy', :id => story.id}, :method => :delete ,  class: "btn btn-danger"%>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <br>
+      <br>
+    </div>
+  </div>
+
+  <div>
+    <br>
+    <%= link_to "Create a New Story", new_story_path,  class: "btn btn-lg btn-primary" %>
+
+  </div>
+</div>

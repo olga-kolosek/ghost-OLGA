@@ -1,5 +1,4 @@
 class TeamController < ApplicationController
-	before_action :authenticate_user!
 	before_action :admin?, only: [:index]
 
   def admin?
