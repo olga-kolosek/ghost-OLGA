@@ -1,0 +1,21 @@
+<%= flash_messages %>
+<%= form_for(@story,  html: {multipart: true}) do |f| %>
+
+<div>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :title %><br />
+      <%= f.text_field :title, autofocus: true, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :content %> <br />
+      <%= f.text_area :content, class: "form-control" %>
+    </div>
+  </div>
+
+</div>
+<%= f.submit "OK", class: "btn btn-lg btn-primary" %>
+<% end %>
