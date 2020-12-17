@@ -1,6 +1,14 @@
+<div style="text-align: center;">
 <h1><%= @story.title %></h1>
+<p>
+  <% @story.tags.each do |tag| %>
+    <button type="button" class="btn btn-secondary">#<%= tag.name %></button>
+  <% end %>
+</p>
+<br>
+<textarea disabled rows="10" cols="50"><%= @story.content %></textarea>
 
-<p><%= @story.content %></p>
 <br>
 
 <%= link_to "Back to Stories List", stories_path,  class: "btn btn-lg btn-primary" %>
+</div>
