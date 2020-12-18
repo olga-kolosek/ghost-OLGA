@@ -9,7 +9,12 @@ class StoriesController < ApplicationController
 
 
   def index
-    @stories = policy_scope(Story.most_recent)
+    
+    if params[:search]
+        @stories = Story.most_recent.where('title LIKE ?', "%#{params[:search]}%")
+      else 
+        @stories = policy_scope(Story.most_recent)
+      end
   end
 
   def new
