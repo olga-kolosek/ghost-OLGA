@@ -53,7 +53,6 @@ class ApplicationPolicy
     end
 
     def destroy?
-      puts "USAO U POLICY DESTROY"
       return true if user.admin? 
     end
   end
