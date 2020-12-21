@@ -1,17 +1,16 @@
 class StoryPolicy < ApplicationPolicy
-class Scope
+  class Scope
     def initialize(user, scope)
       @user  = user
       @scope = scope
     end
 
     def resolve
-      if user.admin? || user.editor?
-        scope.all
-      else
-        scope.where(user: user)
+      if user.deleted_at == nil  
+        user.admin? || user.editor? ? scope.all : scope.where(user: user)
       end
     end
+
 
     private
 
@@ -20,26 +19,26 @@ class Scope
 
 
   def index?
-    true
+    user.deleted_at == nil
   end
- 
+
   def create? 
     user.present?
   end
- 
+
   def update?
-    return true if user.present? && user == story.user
+    user.present? && user == story.user
   end
- 
+
   def destroy?
-    return true if user.present? && user == story.user
+    user.present? && user == story.user
   end
- 
+
   private
- 
-    def story
-      record
-    end
+
+  def story
+    record
+  end
 
 end
 

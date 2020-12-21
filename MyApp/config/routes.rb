@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   get 'team', action: :index, controller: 'team'
+  match '/team/destroy/:id' => 'team#destroy', via: [:get, :delete]
   resources :stories
   resources :tags
 

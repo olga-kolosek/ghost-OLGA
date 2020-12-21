@@ -51,5 +51,9 @@ class ApplicationPolicy
     def resolve
       scope
     end
+
+    def destroy?
+      user.admin? 
+    end
   end
 end

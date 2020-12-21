@@ -1,7 +1,7 @@
   class User < ApplicationRecord
   rolify
   resourcify
-  # Include default devise modules. Others available are:
+  acts_as_paranoid without_default_scope: true  # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
       :recoverable, :rememberable, :validatable, :invitable, invite_for: 7.days
@@ -14,6 +14,7 @@
 
   scope :last_seen, -> { where.not(last_seen_at: 2.minutes.ago..DateTime.now).or(where(:last_seen_at => nil)) }
   scope :invitation_sent, -> { where.not(:invitation_sent_at => nil)}
+  scope :not_deleted_team_members, -> {where(:deleted_at => nil).where.not(:invitation_sent_at => nil) }
 
 
   def admin?

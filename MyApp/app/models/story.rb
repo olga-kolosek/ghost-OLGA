@@ -1,6 +1,6 @@
 class Story < ApplicationRecord
   
-  belongs_to :user
+  belongs_to :user, -> { with_deleted }
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
