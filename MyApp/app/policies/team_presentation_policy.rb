@@ -3,7 +3,7 @@ class TeamPresentationPolicy < ApplicationPolicy
     user.admin? && user.deleted_at == nil
   end
 
-  def new
+  def new?
     TeamPresentation.count == 0
   end
 
