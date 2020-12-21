@@ -53,7 +53,7 @@ class ApplicationPolicy
     end
 
     def destroy?
-      return true if user.admin? 
+      user.admin? 
     end
   end
 end

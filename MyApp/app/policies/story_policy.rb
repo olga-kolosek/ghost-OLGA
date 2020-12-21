@@ -6,9 +6,7 @@ class StoryPolicy < ApplicationPolicy
     end
 
     def resolve
-      if !(user.deleted_at == nil)
-        scope.none
-      else  
+      if user.deleted_at == nil  
         user.admin? || user.editor? ? scope.all : scope.where(user: user)
       end
     end
@@ -21,7 +19,7 @@ class StoryPolicy < ApplicationPolicy
 
 
   def index?
-    true
+    user.deleted_at == nil
   end
 
   def create? 
@@ -29,11 +27,11 @@ class StoryPolicy < ApplicationPolicy
   end
 
   def update?
-    return true if user.present? && user == story.user
+    user.present? && user == story.user
   end
 
   def destroy?
-    return true if user.present? && user == story.user
+    user.present? && user == story.user
   end
 
   private

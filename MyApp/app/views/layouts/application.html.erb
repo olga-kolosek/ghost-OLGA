@@ -2,10 +2,10 @@
 <html>
 <head>
   <title>RubyOnRails</title>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
   <%= csrf_meta_tags %>
 </head>
@@ -26,21 +26,22 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-                <div class="Container">
-                  <button class="navbar-brand"><%= link_to "Edit profile", edit_user_registration_path %></button>
-                  <% if current_user.role == 'admin' %>
-                    <button class="navbar-brand"><%= link_to "Team", "/team" %></button> 
-                  <% end %>
-                  <button class="navbar-brand"><%= link_to "Stories", "/stories" %></button> 
-
-                  <button class="navbar-brand"><%= link_to "Logout", destroy_user_session_path, method: :delete %></button>
-                </div>
-                <% else %>
-                <div class="Container">
-                  <button class="navbar-brand"><%= link_to "Sign up", new_user_registration_path %></button>
-                  <button class="navbar-brand"><%= link_to "Login", new_user_session_path %></button>
-                </div>
-                <% end %>
+            <div class="Container">
+              <button class="navbar-brand"><%= link_to "Edit profile", edit_user_registration_path %></button>
+              <% if current_user.deleted_at == nil %>
+              <% if current_user.role == 'admin' %>
+              <button class="navbar-brand"><%= link_to "Team", "/team" %></button> 
+              <% end %>
+              <button class="navbar-brand"><%= link_to "Stories", "/stories" %></button> 
+              <% end %>
+              <button class="navbar-brand"><%= link_to "Logout", destroy_user_session_path, method: :delete %></button>
+            </div>
+            <% else %>
+            <div class="Container">
+              <button class="navbar-brand"><%= link_to "Sign up", new_user_registration_path %></button>
+              <button class="navbar-brand"><%= link_to "Login", new_user_session_path %></button>
+            </div>
+            <% end %>
           </ul>
         </div>
       </div>
