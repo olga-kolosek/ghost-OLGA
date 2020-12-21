@@ -2,6 +2,7 @@ class TeamController < ApplicationController
 	before_action :check_permission, only: [:index, :destroy]
 
   def index
+    @team_presentation = TeamPresentation.first
     @users = User.invitation_sent
   end
 

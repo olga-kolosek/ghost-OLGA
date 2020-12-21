@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   match '/team/destroy/:id' => 'team#destroy', via: [:get, :delete]
   resources :stories
   resources :tags
+  resources :team_presentations
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
