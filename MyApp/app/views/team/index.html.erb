@@ -1,6 +1,6 @@
 <div class="col-md-8 col-md-offset-2">
 	<div style="text-align: center;">
-
+		<!--
 		<% if @team_presentation == nil %>
 		<br>
 		<%= link_to "Create a New Team Presentation", new_team_presentation_path,  class: "btn btn-lg btn-primary" %>
@@ -15,7 +15,7 @@
 			<div class="inner"><button type="button" class="btn btn-light"><%= link_to "Edit", edit_team_presentation_path(@team_presentation) %></button> </div>
 			<div class="inner"><%=button_to 'Delete', {:controller => :team_presentations, :action => 'destroy', :id => @team_presentation.id}, :method => :delete ,  class: "btn btn-danger"%> </div>
 		</div>
-
+	-->
 
 		<% end %> 
 	</div>
