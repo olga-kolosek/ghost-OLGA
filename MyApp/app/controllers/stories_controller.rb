@@ -3,7 +3,7 @@ class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
   
   def set_story
-    @story = Story.find(params[:id])
+    @story = Story.friendly.find(params[:id])
     authorize @story
   end
 
@@ -38,6 +38,9 @@ class StoriesController < ApplicationController
   end
 
   def show
+    if request.path != story_path(@story)
+      redirect_to @story, status: :moved_permanently
+    end
   end
 
   def destroy

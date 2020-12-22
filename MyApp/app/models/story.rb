@@ -1,22 +1,26 @@
 class Story < ApplicationRecord
+
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
+  def should_generate_new_friendly_id?
+    title_changed?
+  end
   
   belongs_to :user, -> { with_deleted }
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
-
-
   scope :most_recent, -> { order(updated_at: :desc) }
 
   def tag_list
-      self.tags.collect do |tag|
+    self.tags.collect do |tag|
       tag.name
-      end.join(", ")
+    end.join(", ")
   end
 
   def tag_list=(tags_string)
     tag_names = tags_string.split(",").collect{|s| s.strip.downcase}.uniq
-      new_or_found_tags = tag_names.collect { |name| Tag.find_or_create_by(name: name) }
-      self.tags = new_or_found_tags
+    new_or_found_tags = tag_names.collect { |name| Tag.find_or_create_by(name: name) }
+    self.tags = new_or_found_tags
   end
 
 end

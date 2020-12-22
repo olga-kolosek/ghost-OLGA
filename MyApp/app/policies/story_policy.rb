@@ -31,7 +31,7 @@ class StoryPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.present? && user == story.user
+    user.present? && user == story.user && user.deleted_at == nil
   end
 
   private
