@@ -12,11 +12,11 @@ class TeamControllerPolicy < ApplicationPolicy
 
 
   def index?
-    user.admin? && user.deleted_at == nil
+    user.admin? && user.deleted_at == nil && user.present?
   end
 
   def create? 
-    user.present? && user.deleted_at == nil
+    user.present? && user.deleted_at == nil && user.present?
   end
 
   def update?

@@ -4,7 +4,7 @@ class SettingPolicy < ApplicationPolicy
   end
 
   def new?
-    user.admin?
+    user.admin? && user.present? && user.deleted_at == nil
   end
 
   def create? 
