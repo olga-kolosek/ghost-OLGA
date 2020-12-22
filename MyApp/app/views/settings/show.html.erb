@@ -1,0 +1,22 @@
+<%= flash_messages %>
+<%= form_for(Setting.new,  html: {multipart: true}) do |f| %>
+<br>
+<div class="row">
+  <div class="form-group">
+    <%= f.label :app_name %><br />
+    <%= f.text_field :app_name, value: Setting.app_name, autofocus: true, class: "form-control" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+    <%= f.label :description %> <br />
+    <%= f.text_area :description, value: Setting.description, class: "form-control" %>
+  </div>
+</div>
+
+<div>
+  <%= f.submit 'Update Settings', class: "btn btn-lg btn-primary" %>
+</div>
+
+<% end %>

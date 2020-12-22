@@ -1,22 +1,14 @@
-class TeamControllerPolicy < ApplicationPolicy
-  class Scope
-    def initialize(user, scope)
-      @user  = user
-      @scope = scope
-    end
-
-    private
-
-    attr_reader :user, :scope
-  end
-
-
+class TeamPresentationPolicy < ApplicationPolicy
   def index?
     user.admin? && user.deleted_at == nil && user.present?
   end
 
+  def new?
+    TeamPresentation.count == 0
+  end
+
   def create? 
-    user.present? && user.deleted_at == nil && user.present?
+    user.present? && user.deleted_at == nil
   end
 
   def update?
@@ -29,10 +21,7 @@ class TeamControllerPolicy < ApplicationPolicy
 
   private
 
-  def team
+  def team_presentation
     record
-  end
-
+  end 
 end
-
-
