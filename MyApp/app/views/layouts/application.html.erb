@@ -31,6 +31,7 @@
               <% if current_user.deleted_at == nil %>
               <% if current_user.role == 'admin' %>
               <button class="navbar-brand"><%= link_to "Team", "/team" %></button> 
+              <button class="navbar-brand"><%= link_to "Settings", "/settings" %></button>
               <% end %>
               <button class="navbar-brand"><%= link_to "Stories", "/stories" %></button> 
               <% end %>
