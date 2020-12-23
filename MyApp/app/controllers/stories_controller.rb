@@ -38,7 +38,7 @@ class StoriesController < ApplicationController
   end
 
   def show
-    if request.path != story_path(@story)
+    if !Story.friendly.exists? params[:id]
       redirect_to @story, status: :moved_permanently
     end
   end
